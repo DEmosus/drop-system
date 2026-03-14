@@ -13,6 +13,7 @@ import { systemRouter } from "../system/system.routes";
 
 export function createApp(): Application {
   const app = express();
+  app.set("trust proxy", 1);
 
   // ── Core middleware ─────────────────────────────────────────────────────────
   app.use(cors({ origin: env.CORS_ORIGIN, credentials: true }));
