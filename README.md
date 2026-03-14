@@ -251,10 +251,10 @@ Client → CDN (Cloudflare) → Load Balancer
 
 ### Medium-term (10k–100k users)
 
-- Replace polling with Server-Sent Events or WebSockets for real-time stock updates
-- Move expiration to a dedicated worker service (Render background worker or BullMQ queue)
-- Add a read replica; route all `GET` endpoints there
-- Queue reservation requests with BullMQ + Redis: requests enter a queue, a worker processes them sequentially per product — eliminates all serialization errors without retries
+- Replace polling with Server-Sent Events or WebSockets for real-time stock updates.
+- Move expiration to a dedicated worker service (Render background worker or BullMQ queue).
+- Add a read replica; route all `GET` endpoints there.
+- Queue reservation requests with BullMQ + Redis: requests enter a queue, a worker processes them sequentially per product — eliminates all serialization errors without retries.
 
 ### Long-term (100k+ users / multi-region)
 
