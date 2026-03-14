@@ -1,5 +1,4 @@
 import { PrismaClient } from "@prisma/client";
-// import bcrypt from "bcryptjs";
 import * as bcrypt from "bcryptjs";
 
 const prisma = new PrismaClient();
@@ -62,35 +61,49 @@ const DEMO_USERS = [
   { email: "bob@example.com", password: "password123" },
 ];
 
-async function seed() {
-  console.log("🌱 Seeding database…\n");
+async function seed(): Promise<void> {
+  console.log("🌱 Checking database...\n");
 
-  await prisma.inventoryLog.deleteMany();
-  await prisma.order.deleteMany();
-  await prisma.reservation.deleteMany();
-  await prisma.product.deleteMany();
-  await prisma.user.deleteMany();
+  // ── Idempotency guard ──────────────────────────────────────────
+  // Safe to run on every deploy — only seeds if the database is empty.
+  const existingCount = await prisma.product.count();
 
-  for (const p of PRODUCTS) {
-    await prisma.product.create({ data: p });
+  if (existingCount > 0) {
+    console.log(
+      `  ℹ️  Database already has ${existingCount} product(s) — skipping seed.`,
+    );
+    return;
+  }
+
+  console.log("  No products found — seeding demo data...\n");
+
+  // ── Products ───────────────────────────────────────────────────
+  for (const product of PRODUCTS) {
+    await prisma.product.create({ data: product });
   }
   console.log(`  ✓ Created ${PRODUCTS.length} products`);
 
+  // ── Users ──────────────────────────────────────────────────────
   for (const { email, password } of DEMO_USERS) {
-    await prisma.user.create({
-      data: { email, passwordHash: await bcrypt.hash(password, 10) },
-    });
+    const passwordHash = await bcrypt.hash(password, 10);
+    await prisma.user.create({ data: { email, passwordHash } });
   }
   console.log(`  ✓ Created ${DEMO_USERS.length} users`);
-  console.log("    demo@example.com / password123");
+  console.log("    demo@example.com  / password123");
   console.log("    alice@example.com / password123");
   console.log("    bob@example.com   / password123");
+
   console.log("\n✅ Seed complete");
 }
 
 seed()
-  .catch((err) => {
+  .catch((err: unknown) => {
     console.error("❌ Seed failed:", err);
-    process.exit(1);
+    // Use a setTimeout so the finally block can run $disconnect first
+    setTimeout(() => {
+      throw err;
+    }, 0);
   })
-  .finally(() => prisma.$disconnect());
+  .finally(() => {
+    void prisma.$disconnect();
+  });
