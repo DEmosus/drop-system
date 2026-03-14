@@ -8,9 +8,6 @@ build/
 # TypeScript cache
 *.tsbuildinfo
 
-# Prisma generated files
-prisma/generated/
-prisma/migrations/
 
 # Environment variables
 .env
