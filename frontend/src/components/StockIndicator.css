@@ -1,0 +1,51 @@
+/* ═══════════════════════════════════════════════════════════════
+   StockIndicator.css
+   ═══════════════════════════════════════════════════════════════ */
+
+.stock-indicator {
+  font-family: var(--font-mono);
+}
+
+.stock-indicator-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-2);
+}
+
+.stock-indicator-label {
+  font-size: 10px;
+  color: var(--text-muted);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.stock-indicator-value {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  transition: color var(--transition-slow);
+}
+
+.stock-indicator-bar {
+  height: 5px;
+  background: var(--bg-tertiary);
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+  margin-bottom: var(--space-2);
+}
+
+.stock-indicator-fill {
+  height: 100%;
+  border-radius: var(--radius-pill);
+  transition:
+    width 0.5s ease,
+    background var(--transition-slow);
+}
+
+.stock-indicator-warning {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  margin-top: var(--space-1);
+}

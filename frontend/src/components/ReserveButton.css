@@ -1,0 +1,117 @@
+/* ═══════════════════════════════════════════════════════════════
+   ReserveButton.css
+   ═══════════════════════════════════════════════════════════════ */
+
+.reserve-button {
+  display: block;
+  width: 100%;
+  padding: 14px var(--space-6);
+  border-radius: var(--radius-md);
+  border: none;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  font-family: var(--font-mono);
+  transition:
+    opacity var(--transition-base),
+    transform var(--transition-fast),
+    box-shadow var(--transition-base);
+}
+
+.reserve-button:active {
+  transform: scale(0.98);
+}
+
+.reserve-button.primary {
+  background: var(--accent-pink);
+  color: #fff;
+  box-shadow: 0 4px 16px rgba(255, 64, 129, 0.3);
+}
+
+.reserve-button.primary:hover {
+  opacity: 0.9;
+  box-shadow: 0 6px 20px rgba(255, 64, 129, 0.45);
+}
+
+.reserve-button.secondary {
+  background: var(--accent-cyan);
+  color: var(--bg-primary);
+  box-shadow: 0 4px 16px rgba(0, 229, 255, 0.2);
+}
+
+.reserve-button.secondary:hover {
+  opacity: 0.9;
+  box-shadow: 0 6px 20px rgba(0, 229, 255, 0.32);
+}
+
+.reserve-button.ghost {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+}
+
+.reserve-button.ghost:hover {
+  border-color: var(--border-hover);
+  color: var(--text-secondary);
+}
+
+.reserve-button.danger {
+  background: transparent;
+  border: 1px solid rgba(244, 67, 54, 0.3);
+  color: var(--error);
+  font-size: 12px;
+  padding: 9px var(--space-4);
+  opacity: 0.8;
+}
+
+.reserve-button.danger:hover {
+  opacity: 1;
+  border-color: rgba(244, 67, 54, 0.55);
+}
+
+.reserve-button.disabled {
+  background: var(--bg-tertiary);
+  color: var(--text-muted);
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* ─── Multi-button wrapper ──────────────────────────────────── */
+
+.reserve-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+/* ─── Status messages ───────────────────────────────────────── */
+
+.reserve-message {
+  text-align: center;
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-md);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.06em;
+}
+
+.reserve-message.info {
+  color: var(--text-muted);
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border);
+}
+
+.reserve-message.error {
+  background: rgba(244, 67, 54, 0.07);
+  border: 1px solid rgba(244, 67, 54, 0.25);
+  color: var(--error);
+}
+
+.reserve-message.complete {
+  background: var(--accent-cyan-dim);
+  border: 1px solid var(--border-cyan);
+  color: var(--accent-cyan);
+  padding: var(--space-5) var(--space-4);
+}
