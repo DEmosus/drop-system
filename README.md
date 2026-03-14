@@ -244,10 +244,10 @@ Client → CDN (Cloudflare) → Load Balancer
 
 **Changes needed:**
 
-- Redis for rate limiting, session cache, distributed expiry lock
-- PgBouncer for connection multiplexing
-- CDN caching for `GET /api/products` (3s TTL)
-- Horizontal scaling of API instances behind a load balancer
+- Redis for rate limiting, session cache, distributed expiry lock.
+- PgBouncer for connection multiplexing.
+- CDN caching for `GET /api/products` (3s TTL).
+- Horizontal scaling of API instances behind a load balancer.
 
 ### Medium-term (10k–100k users)
 
